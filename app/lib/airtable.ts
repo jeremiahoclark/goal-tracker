@@ -7,4 +7,5 @@ if (!process.env.NEXT_PUBLIC_AIRTABLE_API_KEY) {
 const base = new Airtable({ apiKey: process.env.NEXT_PUBLIC_AIRTABLE_API_KEY }).base('appmePGTRHHESvrPU');
 
 export const goalsTable = base('goals');
-export const progressTable = base('goals progress'); 
+export const progressTable = base('goals progress');
+export const milestonesTable = base('milestones'); 

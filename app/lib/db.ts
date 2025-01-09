@@ -1,4 +1,4 @@
-import { goalsTable, progressTable } from './airtable';
+import { goalsTable, progressTable, milestonesTable } from './airtable';
 
 export interface Goal {
   id: string;
@@ -9,6 +9,16 @@ export interface Goal {
   unit: string;
   quarterly_target: number;
   progress: number;
+}
+
+export interface Milestone {
+  id: string;
+  title: string;
+  description: string;
+  goalId: string;
+  targetDate: string;
+  status: 'Not Started' | 'In Progress' | 'Completed';
+  targetValue: number;
 }
 
 export async function getGoals(): Promise<Goal[]> {
@@ -23,6 +33,56 @@ export async function getGoals(): Promise<Goal[]> {
     quarterly_target: record.get('Quarterly Target') as number,
     progress: (record.get('Progress') as number) || 0,
   }));
+}
+
+export async function getMilestones(): Promise<Milestone[]> {
+  const records = await milestonesTable.select().all();
+  return records.map(record => ({
+    id: record.id,
+    title: record.get('Title') as string,
+    description: record.get('Description') as string,
+    goalId: (record.get('Goal') as string[])[0],
+    targetDate: record.get('Target Date') as string,
+    status: record.get('Status') as 'Not Started' | 'In Progress' | 'Completed',
+    targetValue: record.get('Target Value') as number,
+  }));
+}
+
+export async function addMilestone(milestone: Omit<Milestone, 'id'>): Promise<Milestone> {
+  const record = await milestonesTable.create({
+    'Title': milestone.title,
+    'Description': milestone.description,
+    'Goal': [milestone.goalId],
+    'Target Date': milestone.targetDate,
+    'Status': milestone.status,
+    'Target Value': milestone.targetValue,
+  });
+
+  return {
+    id: record.id,
+    title: record.get('Title') as string,
+    description: record.get('Description') as string,
+    goalId: (record.get('Goal') as string[])[0],
+    targetDate: record.get('Target Date') as string,
+    status: record.get('Status') as 'Not Started' | 'In Progress' | 'Completed',
+    targetValue: record.get('Target Value') as number,
+  };
+}
+
+export async function updateMilestoneStatus(id: string, status: 'Not Started' | 'In Progress' | 'Completed'): Promise<Milestone> {
+  const record = await milestonesTable.update(id, {
+    'Status': status,
+  });
+
+  return {
+    id: record.id,
+    title: record.get('Title') as string,
+    description: record.get('Description') as string,
+    goalId: (record.get('Goal') as string[])[0],
+    targetDate: record.get('Target Date') as string,
+    status: record.get('Status') as 'Not Started' | 'In Progress' | 'Completed',
+    targetValue: record.get('Target Value') as number,
+  };
 }
 
 export async function addDailyProgress(goalId: string, progress: number) {

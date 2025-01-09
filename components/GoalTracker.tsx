@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import GoalOverview from './GoalOverview'
 import GoalCalendar from './GoalCalendar'
 import DailyInput from './DailyInput'
+import MilestonesSection from './MilestonesSection'
 import { fetchGoals, submitDailyProgress } from '@/app/actions'
 
 interface Goal {
@@ -42,6 +43,11 @@ export default function GoalTracker() {
     <div className="space-y-6">
       <Card>
         <CardContent className="pt-6">
+          <GoalOverview goals={goals} />
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className="pt-6">
           <DailyInput 
             goals={goals} 
             dailyProgress={dailyProgress} 
@@ -52,7 +58,7 @@ export default function GoalTracker() {
       </Card>
       <Card>
         <CardContent className="pt-6">
-          <GoalOverview goals={goals} />
+          <MilestonesSection goals={goals} />
         </CardContent>
       </Card>
       <Card>
