@@ -6,7 +6,9 @@ import GoalOverview from './GoalOverview'
 import GoalCalendar from './GoalCalendar'
 import DailyInput from './DailyInput'
 import MilestonesSection from './MilestonesSection'
+import WeeklyReportButton from './WeeklyReportButton'
 import { fetchGoals, submitDailyProgress } from '@/app/actions'
+import { Toaster } from 'sonner'
 
 interface Goal {
   id: string
@@ -40,33 +42,39 @@ export default function GoalTracker() {
   }
 
   return (
-    <div className="space-y-6">
-      <Card>
-        <CardContent className="pt-6">
-          <GoalOverview goals={goals} />
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="pt-6">
-          <DailyInput 
-            goals={goals} 
-            dailyProgress={dailyProgress} 
-            onInputChange={handleDailyInput} 
-            onSubmit={handleSubmitDailyProgress} 
-          />
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="pt-6">
-          <MilestonesSection goals={goals} />
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="pt-6">
-          <GoalCalendar goals={goals} />
-        </CardContent>
-      </Card>
-    </div>
+    <>
+      <Toaster position="top-right" />
+      <div className="space-y-6">
+        <div className="flex justify-end">
+          <WeeklyReportButton />
+        </div>
+        <Card>
+          <CardContent className="pt-6">
+            <GoalOverview goals={goals} />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-6">
+            <DailyInput 
+              goals={goals} 
+              dailyProgress={dailyProgress} 
+              onInputChange={handleDailyInput} 
+              onSubmit={handleSubmitDailyProgress} 
+            />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-6">
+            <MilestonesSection goals={goals} />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-6">
+            <GoalCalendar goals={goals} />
+          </CardContent>
+        </Card>
+      </div>
+    </>
   )
 }
 
