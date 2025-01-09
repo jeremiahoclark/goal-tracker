@@ -1,7 +1,7 @@
 import { Progress } from "@/components/ui/progress"
 
 interface Goal {
-  id: number
+  id: string
   title: string
   quarterly_target: number
   progress: number

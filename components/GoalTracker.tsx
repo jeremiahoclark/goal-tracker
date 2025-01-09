@@ -8,7 +8,7 @@ import DailyInput from './DailyInput'
 import { fetchGoals, submitDailyProgress } from '@/app/actions'
 
 interface Goal {
-  id: number
+  id: string
   title: string
   description: string
   why: string
@@ -20,19 +20,19 @@ interface Goal {
 
 export default function GoalTracker() {
   const [goals, setGoals] = useState<Goal[]>([])
-  const [dailyProgress, setDailyProgress] = useState<{[key: number]: number}>({})
+  const [dailyProgress, setDailyProgress] = useState<{[key: string]: number}>({})
 
   useEffect(() => {
     fetchGoals().then(setGoals)
   }, [])
 
-  const handleDailyInput = (goalId: number, value: number) => {
+  const handleDailyInput = (goalId: string, value: number) => {
     setDailyProgress(prev => ({ ...prev, [goalId]: value }))
   }
 
   const handleSubmitDailyProgress = async () => {
     for (const [goalId, progress] of Object.entries(dailyProgress)) {
-      const updatedGoal = await submitDailyProgress(Number(goalId), progress)
+      const updatedGoal = await submitDailyProgress(goalId, progress)
       setGoals(prevGoals => prevGoals.map(goal => goal.id === updatedGoal.id ? updatedGoal : goal))
     }
     setDailyProgress({})

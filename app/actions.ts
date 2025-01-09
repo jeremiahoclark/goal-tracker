@@ -6,7 +6,7 @@ export async function fetchGoals() {
   return await getGoals()
 }
 
-export async function submitDailyProgress(goalId: number, progress: number) {
+export async function submitDailyProgress(goalId: string, progress: number) {
   return await addDailyProgress(goalId, progress)
 }
 

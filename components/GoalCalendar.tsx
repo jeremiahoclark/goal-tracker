@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Check } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 
 interface Goal {
-  id: number
+  id: string
   daily_target: number
   progress: number
 }
