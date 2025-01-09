@@ -1,6 +1,6 @@
 'use server'
 
-import { getGoals, updateGoalProgress, addDailyProgress } from './lib/db'
+import { getGoals, addDailyProgress } from './lib/db'
 
 export async function fetchGoals() {
   return await getGoals()
