@@ -4,33 +4,33 @@
  
 @layer base {
   :root {
-    --background: 270 30% 98%;
-    --foreground: 270 10% 10%;
+    --background: 0 0% 100%;
+    --foreground: 217 100% 4%;
     
-    --card: 270 30% 98%;
-    --card-foreground: 270 10% 10%;
+    --card: 210 20% 98%;
+    --card-foreground: 217 100% 4%;
  
-    --popover: 270 30% 98%;
-    --popover-foreground: 270 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 100% 4%;
  
-    --primary: 270 59% 40%;
-    --primary-foreground: 270 10% 98%;
+    --primary: 213 100% 12%;
+    --primary-foreground: 0 0% 100%;
  
-    --secondary: 45 80% 50%;
-    --secondary-foreground: 45 10% 10%;
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 217 100% 4%;
  
-    --muted: 270 20% 90%;
-    --muted-foreground: 270 10% 40%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 20% 40%;
  
-    --accent: 45 80% 50%;
-    --accent-foreground: 45 10% 10%;
+    --accent: 213 100% 12%;
+    --accent-foreground: 0 0% 100%;
  
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 270 20% 88%;
-    --input: 270 20% 88%;
-    --ring: 270 59% 40%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 45 100% 50%;
   }
 }
 
@@ -41,5 +41,58 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom color classes */
+.bg-navy-black {
+  background-color: #000814;
+}
+
+.bg-navy-blue {
+  background-color: #001D3D;
+}
+
+.bg-deep-blue {
+  background-color: #003566;
+}
+
+.bg-gold {
+  background-color: #FFC300;
+}
+
+.bg-light-gold {
+  background-color: #FFD60A;
+}
+
+.text-navy-black {
+  color: #000814;
+}
+
+.text-navy-blue {
+  color: #001D3D;
+}
+
+.text-deep-blue {
+  color: #003566;
+}
+
+.text-gold {
+  color: #FFC300;
+}
+
+.text-light-gold {
+  color: #FFD60A;
+}
+
+.border-gold {
+  border-color: #FFC300;
+}
+
+.hover\:bg-gold:hover {
+  background-color: #FFC300;
+}
+
+.hover\:text-gold:hover {
+  color: #FFC300;
 }
 
